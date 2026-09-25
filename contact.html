@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact — GDPR, Cookies & Co.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo"><span class="dot"></span> GDPR, Cookies &amp; Co.</a>
+    <nav class="nav-links">
+      <a href="index.html#process">How it works</a>
+      <a href="index.html#check">What we check</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#faq">FAQ</a>
+    </nav>
+    <a href="index.html#free-review" class="nav-cta">Free Website Review</a>
+  </div>
+</header>
+<div class="page-space"></div>
+
+<section class="section" style="padding-top:40px;">
+  <div class="wrap" style="max-width:520px;">
+    <h2 style="text-align:left;">Contact us</h2>
+    <p style="color:rgba(7,27,52,0.6); margin-bottom:32px;">Questions about a review, a report, or your privacy setup — send us a message.</p>
+
+    <form id="contact-form" class="form" style="margin:0;">
+      <div class="field">
+        <label for="c-name">Name</label>
+        <input id="c-name" name="Name" type="text" required>
+      </div>
+      <div class="field">
+        <label for="c-email">Email</label>
+        <input id="c-email" name="Email" type="email" required>
+      </div>
+      <div class="field">
+        <label for="c-message">Message</label>
+        <textarea id="c-message" name="Message" required></textarea>
+      </div>
+      <label class="consent">
+        <input type="checkbox" name="consent" required>
+        <span>I agree that this information will be used only to respond to my enquiry.</span>
+      </label>
+      <button type="submit" class="btn btn-navy" style="width:100%;">Send message</button>
+      <p class="form-msg" id="c-msg"></p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div>
+      <h4>GDPR, Cookies &amp; Co.</h4>
+      <p style="max-width:280px; font-size:0.9rem;">Independent website compliance reviews.</p>
+    </div>
+    <nav class="footer-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="cookie-policy.html">Cookie Policy</a>
+      <a href="terms.html">Terms</a>
+      <a href="legal-notice.html">Legal Notice</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="forms.js"></script>
+<script>
+  wireMailtoForm('contact-form', 'Website contact form message', '#c-msg');
+</script>
+</body>
+</html>
