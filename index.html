@@ -468,7 +468,7 @@ document.querySelectorAll("form[data-form]").forEach(form => {
       } else {
         show(
           form,
-          "We couldn't submit your request. Please check your connection and try again.",
+          "We couldn't submit your request. Please check your connection and try again. [Debug: " + (error && error.message ? error.message : String(error)) + "]",
           "err"
         );
       }
