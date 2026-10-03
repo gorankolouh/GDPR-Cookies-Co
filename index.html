@@ -156,7 +156,6 @@ footer{background:var(--night);color:#8E9BBA;padding:60px 0 40px;font-size:.92re
               <label class="t" for="c-email">Email for your result</label>
               <input id="c-email" name="email" type="email" placeholder="you@yourcompany.com" required autocomplete="email">
             </div>
-            <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
             <label class="consent"><input type="checkbox" name="consent" required><span>I agree that my website address and email will be used only to run this check and send me the result.</span></label>
             <button class="btn btn-dark" type="submit">Check my website for free</button>
             <p class="msg" role="status" aria-live="polite"></p>
@@ -272,7 +271,6 @@ footer{background:var(--night);color:#8E9BBA;padding:60px 0 40px;font-size:.92re
               <label class="t" for="p-url">Website address</label>
               <input id="p-url" name="website" type="url" inputmode="url" placeholder="https://yourcompany.com" required autocomplete="url">
             </div>
-            <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
             <label class="consent"><input type="checkbox" name="consent" required><span>I agree to the <a href="terms.html">Terms</a> and that my details will be used to prepare and send my report.</span></label>
             <button class="btn btn-gold" type="submit">Continue to payment</button>
             <p class="msg" role="status" aria-live="polite"></p>
@@ -312,12 +310,6 @@ footer{background:var(--night);color:#8E9BBA;padding:60px 0 40px;font-size:.92re
 </footer>
 
 <script>
-window.addEventListener("error", function (e) {
-  var b = document.createElement("div");
-  b.style.cssText = "position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#B4262F;color:#fff;padding:10px;font:14px sans-serif";
-  b.textContent = "JS error: " + e.message;
-  document.body.appendChild(b);
-});
 /* ============ SETTINGS ============ */
 const FORM_ENDPOINT = "https://formboost.app/f/903nc28y";
 const STRIPE_LINK   = "https://buy.stripe.com/28EaEWeGoaLl78oao4a7C01";
@@ -425,15 +417,6 @@ async function send(form, kind) {
 document.querySelectorAll("form[data-form]").forEach(form => {
   form.addEventListener("submit", async event => {
     event.preventDefault();
-    show(form, "Checking…", "ok");
-
-    /* Honeypot */
-    const honeypot = form.elements["_gotcha"];
-    if (honeypot && honeypot.value) {
-      honeypot.value = "";
-      show(form, "Please tap the button once more.", "err");
-      return;
-    }
 
     if (!valid(form)) return;
 
@@ -479,7 +462,7 @@ document.querySelectorAll("form[data-form]").forEach(form => {
       } else {
         show(
           form,
-          "We couldn't submit your request. Please check your connection and try again. [Debug: " + (error && error.message ? error.message : String(error)) + "]",
+          "We couldn't submit your request. Please check your connection and try again.",
           "err"
         );
       }
