@@ -343,11 +343,13 @@ function valid(form){
   return true;
 }
 async function send(form, kind){
-  const data = { type: kind, website: form.website.value.trim(), email: form.email.value.trim(), _gotcha: form._gotcha.value, page: location.href };
-  const res = await fetch(FORM_ENDPOINT, { method:"POST", headers:{ "Content-Type":"application/json", "Accept":"application/json" }, body: JSON.stringify(data) });
-  if (!res.ok) throw new Error("form");
-}
-
+  const fd = new FormData();
+  fd.append("type", kind);
+  fd.append("website", form.website.value.trim());
+  fd.append("email", form.email.value.trim());
+  fd.append("page", location.href);
+  const res = await fetch(FORM_ENDPOINT, { method:"POST", body: fd });
+  if (!res.ok) throw new Error("form " + res.status);}
 document.querySelectorAll("form[data-form]").forEach(form => {
   form.addEventListener("submit", async e => {
     e.preventDefault();
