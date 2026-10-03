@@ -344,12 +344,12 @@ function valid(form){
   return true;
 }
 async function send(form, kind){
-  const fd = new FormData();
-  fd.append("type", kind);
-  fd.append("website", form.website.value.trim());
-  fd.append("email", form.email.value.trim());
-  fd.append("page", location.href);
-  const res = await fetch(FORM_ENDPOINT, { method:"POST", body: fd });
+  const body = new URLSearchParams();
+  body.append("type", kind);
+  body.append("website", form.website.value.trim());
+  body.append("email", form.email.value.trim());
+  body.append("page", location.href);
+  const res = await fetch(FORM_ENDPOINT, { method:"POST", body });
   if (!res.ok) throw new Error("form " + res.status);
 }
 
@@ -359,7 +359,7 @@ document.querySelectorAll("form[data-form]").forEach(form => {
     if (form._gotcha.value) return;           // bot
     if (!valid(form)) return;
     const btn = form.querySelector("button[type=submit]"), label = btn.textContent;
-    btn.disabled = true; btn.textContent = "Please wait…";
+    btn.disabled = true; btn.textContent = "Please wait…"; show(form, "Sending…", "ok");
     const kind = form.dataset.form;
     try {
       await send(form, kind);
