@@ -312,6 +312,12 @@ footer{background:var(--night);color:#8E9BBA;padding:60px 0 40px;font-size:.92re
 </footer>
 
 <script>
+window.addEventListener("error", function (e) {
+  var b = document.createElement("div");
+  b.style.cssText = "position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#B4262F;color:#fff;padding:10px;font:14px sans-serif";
+  b.textContent = "JS error: " + e.message;
+  document.body.appendChild(b);
+});
 /* ============ SETTINGS ============ */
 const FORM_ENDPOINT = "https://formboost.app/f/903nc28y";
 const STRIPE_LINK   = "https://buy.stripe.com/28EaEWeGoaLl78oao4a7C01";
@@ -419,10 +425,15 @@ async function send(form, kind) {
 document.querySelectorAll("form[data-form]").forEach(form => {
   form.addEventListener("submit", async event => {
     event.preventDefault();
+    show(form, "Checking…", "ok");
 
     /* Honeypot */
     const honeypot = form.elements["_gotcha"];
-    if (honeypot && honeypot.value) return;
+    if (honeypot && honeypot.value) {
+      honeypot.value = "";
+      show(form, "Please tap the button once more.", "err");
+      return;
+    }
 
     if (!valid(form)) return;
 
