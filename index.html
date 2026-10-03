@@ -312,75 +312,172 @@ footer{background:var(--night);color:#8E9BBA;padding:60px 0 40px;font-size:.92re
 </footer>
 
 <script>
-/* ============ SETTINGS: edit these two lines ============ */
-const FORM_ENDPOINT = "https://formboost.app/f/903nc28y";          // your form service URL (Formspree, Getform, Basin...)
-const STRIPE_LINK   = "https://buy.stripe.com/28EaEWeGoaLl78oao4a7C01";     // Stripe Payment Link for the €99 report
-/* ========================================================== */
+/* ============ SETTINGS ============ */
+const FORM_ENDPOINT = "https://formboost.app/f/903nc28y";
+const STRIPE_LINK   = "https://buy.stripe.com/28EaEWeGoaLl78oao4a7C01";
+/* =================================== */
 
-// Switch between landing page and checkout page
-function route(){
+/* Switch between landing page and checkout */
+function route() {
   const co = location.hash === "#checkout";
   document.body.classList.toggle("is-checkout", co);
-  if (co) window.scrollTo(0,0);
+  if (co) window.scrollTo(0, 0);
 }
-window.addEventListener("hashchange", route); route();
-document.querySelectorAll("[data-home]").forEach(a => a.addEventListener("click", () => {
-  if (document.body.classList.contains("is-checkout")) {
-    const id = a.getAttribute("href");
-    document.body.classList.remove("is-checkout");
-    setTimeout(() => { const el = document.querySelector(id); if (el) el.scrollIntoView(); }, 0);
-  }
-}));
 
-function show(form, text, type){
+window.addEventListener("hashchange", route);
+route();
+
+document.querySelectorAll("[data-home]").forEach(a => {
+  a.addEventListener("click", () => {
+    if (document.body.classList.contains("is-checkout")) {
+      const id = a.getAttribute("href");
+      document.body.classList.remove("is-checkout");
+      setTimeout(() => {
+        const el = document.querySelector(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 0);
+    }
+  });
+});
+
+function show(form, text, type) {
   const m = form.querySelector(".msg");
-  m.className = "msg " + type; m.textContent = text;
+  if (!m) return;
+  m.className = "msg " + type;
+  m.textContent = text;
 }
-function valid(form){
-  const url = form.website.value.trim(), email = form.email.value.trim();
-  if (!/^https?:\/\/[^\s.]+\.[^\s]{2,}/i.test(url)) { show(form, "Enter the full website address, starting with https://", "err"); form.website.focus(); return false; }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { show(form, "Enter a valid email address.", "err"); form.email.focus(); return false; }
-  if (!form.consent.checked) { show(form, "Please tick the consent box to continue.", "err"); return false; }
+
+function valid(form) {
+  const website = form.elements.website;
+  const email = form.elements.email;
+  const consent = form.elements.consent;
+
+  if (!website || !email || !consent) {
+    show(form, "The form is not configured correctly. Please contact us.", "err");
+    return false;
+  }
+
+  const url = website.value.trim();
+  const mail = email.value.trim();
+
+  let parsedUrl;
+  try {
+    parsedUrl = new URL(url);
+  } catch (_) {
+    parsedUrl = null;
+  }
+
+  if (!parsedUrl || !/^https?:$/.test(parsedUrl.protocol) || !parsedUrl.hostname.includes(".")) {
+    show(form, "Enter the full website address, starting with https://", "err");
+    website.focus();
+    return false;
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) {
+    show(form, "Enter a valid email address.", "err");
+    email.focus();
+    return false;
+  }
+
+  if (!consent.checked) {
+    show(form, "Please tick the consent box to continue.", "err");
+    return false;
+  }
+
   return true;
 }
-async function send(form, kind){
+
+async function send(form, kind) {
   const body = new URLSearchParams();
+
+  body.append("website", form.elements.website.value.trim());
+  body.append("email", form.elements.email.value.trim());
+  body.append("consent", "yes");
   body.append("type", kind);
-  body.append("website", form.website.value.trim());
-  body.append("email", form.email.value.trim());
-  body.append("page", location.href);
-  // no-cors: the form service does not allow browser (CORS) reads, so a normal fetch
-  // looks like a failure even when the data was delivered. The request is still sent;
-  // only a real network error throws here.
-  await fetch(FORM_ENDPOINT, { method:"POST", mode:"no-cors", body });
+  body.append("page", window.location.href);
+
+  const response = await fetch(FORM_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+    },
+    body: body.toString()
+  });
+
+  const responseText = await response.text();
+
+  if (!response.ok) {
+    console.error("Form submission failed:", response.status, responseText);
+    throw new Error("Form service returned HTTP " + response.status);
+  }
+
+  return responseText;
 }
 
+/* Handle both forms */
 document.querySelectorAll("form[data-form]").forEach(form => {
-  form.addEventListener("submit", async e => {
-    e.preventDefault();
-    if (form._gotcha.value) return;           // bot
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    /* Honeypot */
+    const honeypot = form.elements["_gotcha"];
+    if (honeypot && honeypot.value) return;
+
     if (!valid(form)) return;
-    const btn = form.querySelector("button[type=submit]"), label = btn.textContent;
-    btn.disabled = true; btn.textContent = "Please wait…"; show(form, "Sending…", "ok");
+
+    const button = form.querySelector("button[type='submit']");
+    const originalLabel = button ? button.textContent : "";
+
+    if (button) {
+      button.disabled = true;
+      button.textContent = "Please wait…";
+    }
+
+    show(form, "Sending…", "ok");
+
     const kind = form.dataset.form;
+
     try {
       await send(form, kind);
+
       if (kind === "check") {
-        show(form, "Thank you. We are checking your website and will email your result.", "ok");
+        show(
+          form,
+          "Thank you. Your website has been submitted. We will email you the result.",
+          "ok"
+        );
         form.reset();
       } else {
+        /* Only redirect to Stripe after the form submission succeeds. */
+        const email = form.elements.email.value.trim();
         const url = new URL(STRIPE_LINK);
-        url.searchParams.set("prefilled_email", form.email.value.trim());
-        location.href = url.toString();
+        url.searchParams.set("prefilled_email", email);
+        window.location.href = url.toString();
         return;
       }
-    } catch (err) {
-      if (kind === "checkout" && !/YOUR_/.test(STRIPE_LINK)) { // do not block payment if the form service is down
-        const url = new URL(STRIPE_LINK); url.searchParams.set("prefilled_email", form.email.value.trim()); location.href = url.toString(); return;
+    } catch (error) {
+      console.error(error);
+
+      if (kind === "checkout") {
+        show(
+          form,
+          "We couldn't submit the order details. Please try again. Your card has not been charged.",
+          "err"
+        );
+      } else {
+        show(
+          form,
+          "We couldn't submit your request. Please check your connection and try again.",
+          "err"
+        );
       }
-      show(form, "Something went wrong. Please try again in a moment or write to us via the Contact page.", "err");
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.textContent = originalLabel;
+      }
     }
-    btn.disabled = false; btn.textContent = label;
   });
 });
 </script>
