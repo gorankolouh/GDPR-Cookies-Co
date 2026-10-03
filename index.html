@@ -3,192 +3,379 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>GDPR, Cookies & Co. — European Website Compliance Reviews</title>
-<meta name="description" content="Independent website compliance reviews for businesses serving customers in Europe.">
+<title>Free GDPR & Cookie Check for Your Website</title>
+<meta name="description" content="Enter your website and email. We check your GDPR and cookie compliance for free. Full report with fixes for €99.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+:root{--night:#0A1224;--night2:#111C36;--ink:#0E1730;--mute:#5B6785;--paper:#F4F5F8;--white:#fff;--line:#E1E4EC;--gold:#C9A45C;--gold-d:#B38E45;--ok:#2FBF8F;--warn:#E3A33B;--bad:#E5636D;--r:16px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{font-family:'Hanken Grotesk',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 28px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.serif{font-family:'Newsreader',Georgia,serif}
+
+header{position:absolute;inset:0 0 auto 0;z-index:10;color:#fff}
+.nav{display:flex;align-items:center;justify-content:space-between;height:80px}
+.logo{font-weight:600;text-decoration:none;display:flex;align-items:center;gap:12px;letter-spacing:.01em}
+.nav-links{display:flex;gap:34px;font-size:.93rem;color:#B6C0D8}
+.nav-links a{text-decoration:none}.nav-links a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;font:inherit;font-weight:600;border:0;border-radius:999px;padding:15px 26px;cursor:pointer;text-decoration:none;transition:background .2s,transform .2s}
+.btn-gold{background:var(--gold);color:var(--night)}.btn-gold:hover{background:#D6B471}
+.btn-ghost{border:1px solid rgba(255,255,255,.35);color:#fff;padding:10px 20px;font-size:.9rem}.btn-ghost:hover{background:rgba(255,255,255,.08)}
+.btn-dark{background:var(--night);color:#fff}.btn-dark:hover{background:var(--night2)}
+.btn-outline{border:1px solid var(--ink);color:var(--ink)}.btn-outline:hover{background:var(--ink);color:#fff}
+.btn[disabled]{opacity:.6;cursor:wait}
+
+.hero{background:radial-gradient(900px 500px at 85% 10%,rgba(201,164,92,.14),transparent 60%),radial-gradient(700px 500px at 0% 100%,rgba(70,100,200,.18),transparent 60%),var(--night);color:#fff;padding:168px 0 120px;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(180deg,#000 0%,transparent 85%)}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:72px;align-items:center}
+h1{font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:clamp(2.6rem,5.2vw,4.4rem);line-height:1.04;letter-spacing:-.025em}
+.lead{color:#A9B5D0;font-size:1.15rem;margin:24px 0 36px;max-width:31em}
+.form-card{background:#fff;color:var(--ink);border-radius:var(--r);padding:10px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);max-width:520px}
+.form-inner{padding:18px 18px 14px}
+.field{margin-bottom:14px}
+label.t{display:block;font-weight:600;font-size:.86rem;margin-bottom:6px}
+input[type=url],input[type=email],input[type=text]{width:100%;font:inherit;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:#FAFBFC;color:var(--ink)}
+input:focus{border-color:var(--gold);outline:none;background:#fff;box-shadow:0 0 0 4px rgba(201,164,92,.2)}
+.consent{display:flex;gap:10px;font-size:.82rem;color:var(--mute);margin:6px 0 18px;align-items:flex-start;line-height:1.45}
+.consent input{margin-top:3px;accent-color:var(--night)}
+.consent a{text-decoration:underline}
+.form-card .btn{width:100%}
+.fine{font-size:.82rem;color:var(--mute);margin-top:12px;text-align:center}
+.msg{margin-top:14px;padding:12px 14px;border-radius:10px;font-size:.93rem;display:none}
+.msg.ok{display:block;background:#E3F5EE;color:#075E43}.msg.err{display:block;background:#FBE6E8;color:#B4262F}
+.hp{position:absolute;left:-9999px}
+.assure{display:flex;gap:26px;margin-top:26px;font-size:.88rem;color:#8E9BBA;flex-wrap:wrap}
+.assure span{display:flex;gap:8px;align-items:center}
+.assure svg{color:var(--gold)}
+
+.report{background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:26px;backdrop-filter:blur(6px)}
+.rep-top{display:flex;align-items:center;gap:20px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.12)}
+.rep-top b{display:block;font-weight:600}
+.rep-top small{color:#8E9BBA;font-size:.85rem}
+.ring{flex:none}
+.find{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.find:last-of-type{border:0}
+.dot{flex:none;width:9px;height:9px;border-radius:50%;margin-top:9px}
+.find strong{display:block;font-weight:600;font-size:.98rem}
+.find p{color:#97A4C2;font-size:.88rem;line-height:1.45}
+.rep-foot{margin-top:6px;font-size:.8rem;color:#7A88A9}
+
+section.s{padding:104px 0}
+section.white{background:#fff}
+h2{font-family:'Newsreader',Georgia,serif;font-weight:400;font-size:clamp(2rem,3.6vw,2.9rem);line-height:1.1;letter-spacing:-.02em;margin-bottom:14px}
+.sub{color:var(--mute);max-width:34em;margin-bottom:56px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.step{border-top:1px solid var(--ink);padding-top:22px}
+.step .n{font-family:'Newsreader',serif;font-size:1.6rem;color:var(--gold-d);display:block;margin-bottom:8px}
+.step h3{font-size:1.05rem;margin-bottom:6px}.step p{font-size:.94rem;color:var(--mute)}
+.scope{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+.scope div{padding:34px 40px 34px 0;border-bottom:1px solid var(--line)}
+.scope div:nth-child(even){padding:34px 0 34px 40px;border-left:1px solid var(--line)}
+.scope h3{font-family:'Newsreader',serif;font-weight:500;font-size:1.45rem;margin-bottom:8px}
+.scope p{color:var(--mute);max-width:26em}
+
+.price-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.plan{border:1px solid var(--line);border-radius:22px;padding:40px;background:#fff;display:flex;flex-direction:column}
+.plan.main{background:var(--night);color:#fff;border-color:var(--night);box-shadow:0 30px 60px -30px rgba(10,18,36,.6)}
+.plan h3{font-size:1rem;font-weight:600;color:var(--mute)}.plan.main h3{color:var(--gold)}
+.amount{font-family:'Newsreader',serif;font-weight:300;font-size:4.2rem;line-height:1;letter-spacing:-.03em;margin:14px 0 4px}
+.amount small{font-family:'Hanken Grotesk';font-size:.95rem;color:var(--mute);letter-spacing:0}.plan.main .amount small{color:#8E9BBA}
+.plan ul{list-style:none;margin:26px 0 34px;display:grid;gap:13px;flex:1}
+.plan li{padding-left:28px;position:relative;font-size:.97rem}
+.plan li:before{content:"";position:absolute;left:0;top:7px;width:12px;height:6px;border-left:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(-45deg)}
+.plan .btn{width:100%}
+  
+.faq{max-width:780px}
+details{border-bottom:1px solid var(--line);padding:22px 0}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";font-size:1.5rem;line-height:1;color:var(--gold-d);font-weight:400}
+details[open] summary:after{content:"–"}
+details p{margin-top:10px;color:var(--mute);font-size:.98rem;max-width:40em}
+
+#checkout{display:none;background:var(--night);color:#fff;padding:130px 0 100px;min-height:100vh}
+body.is-checkout #checkout{display:block}
+body.is-checkout #landing{display:none}
+.co-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;max-width:980px;margin:0 auto;align-items:start}
+.back{display:inline-block;margin-bottom:28px;color:#8E9BBA;text-decoration:none;font-size:.93rem}
+#checkout h2{color:#fff}#checkout .sub{color:#A9B5D0;margin-bottom:28px}
+.summary{border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:30px;background:rgba(255,255,255,.04)}
+.sum-row{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.sum-row.total{border:0;font-family:'Newsreader',serif;font-size:1.7rem}
+.summary ul{list-style:none;margin:16px 0;display:grid;gap:9px;font-size:.93rem;color:#A9B5D0}
+.secure{display:flex;gap:8px;align-items:flex-start;font-size:.83rem;color:#8E9BBA;margin-top:8px}
+
+footer{background:var(--night);color:#8E9BBA;padding:60px 0 40px;font-size:.92rem;border-top:1px solid rgba(255,255,255,.08)}
+.foot{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.foot b{color:#fff;display:block;margin-bottom:6px;font-weight:600}
+.foot nav{display:flex;gap:26px;flex-wrap:wrap}.foot a{text-decoration:none}.foot a:hover{color:#fff}
+.disc{margin-top:36px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);font-size:.8rem}
+
+@media(max-width:920px){.hero-grid,.price-grid,.co-grid{grid-template-columns:1fr;gap:48px}.steps{grid-template-columns:1fr 1fr}.nav-links{display:none}.hero{padding-top:128px}}
+@media(max-width:600px){.steps{grid-template-columns:1fr}.scope{grid-template-columns:1fr}.scope div,.scope div:nth-child(even){padding:28px 0;border-left:0}section.s{padding:72px 0}.plan{padding:30px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
 </head>
 <body>
 
 <header>
   <div class="wrap nav">
-    <a href="#top" class="logo"><span class="dot"></span> GDPR, Cookies &amp; Co.</a>
+    <a href="#top" class="logo" data-home>
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x=".75" y=".75" width="26.5" height="26.5" rx="8" fill="none" stroke="#C9A45C" stroke-width="1.5"/><path d="M14 6l6 2.4v5.2c0 3.6-2.5 6-6 7.4-3.5-1.4-6-3.8-6-7.4V8.4z" fill="none" stroke="#fff" stroke-width="1.4"/><path d="M11.4 13.6l2 2 3.4-3.8" fill="none" stroke="#C9A45C" stroke-width="1.5"/></svg>
+      GDPR, Cookies &amp; Co.
+    </a>
     <nav class="nav-links">
-      <a href="#process">How it works</a>
-      <a href="#check">What we check</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#faq">FAQ</a>
+      <a href="#process" data-home>How it works</a>
+      <a href="#scope" data-home>What we check</a>
+      <a href="#pricing" data-home>Pricing</a>
+      <a href="#faq" data-home>FAQ</a>
     </nav>
-    <a href="#free-review" class="nav-cta">Free Website Review</a>
+    <a href="#check" class="btn btn-ghost" data-home>Free check</a>
   </div>
 </header>
 
-<section id="top" class="hero">
-  <div class="hero-grid"></div>
-  <div class="binary" aria-hidden="true">
-    <div style="position:absolute; top:6%; left:3%;">01001 10110 00101<br>11010 01001 10001</div>
-    <div style="position:absolute; bottom:10%; left:12%;">10011 00101 11010<br>01100 10110 00101</div>
-    <div style="position:absolute; top:22%; right:5%;">11001 01011 00110<br>01011 11001 01011</div>
-  </div>
-  <div class="wrap hero-inner">
-    <div>
-      <div class="badge"><span class="dot"></span> European compliance, reviewed independently</div>
-      <h1>Is your website ready for European privacy rules?</h1>
-      <p class="desc">We review websites for GDPR, cookies, privacy notices and related compliance requirements — and provide clear, practical recommendations.</p>
-      <ul class="benefits">
-        <li>Clear findings</li>
-        <li>Practical recommendations</li>
-        <li>One fixed price</li>
-      </ul>
-      <a href="#free-review" class="btn btn-gold">Check My Website — Free</a>
-      <p class="small-note">Detailed report: €99 · No payment if no material issues are identified.</p>
-    </div>
-    <div class="hero-art">
-      <div class="glass card-browser">
-        <div class="bar"><span></span><span></span><span></span></div>
-        <div class="body">
-          <div class="bar-line"></div>
-          <div class="bar-line short"></div>
+<main id="landing">
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Is your website compliant with European privacy law?</h1>
+        <p class="lead">Enter your website and email. We check your GDPR and cookie setup against official requirements and send you the result. If everything is in order, you pay nothing.</p>
+
+        <form class="form-card" id="check" data-form="check" novalidate>
+          <div class="form-inner">
+            <div class="field">
+              <label class="t" for="c-url">Website address</label>
+              <input id="c-url" name="website" type="url" inputmode="url" placeholder="https://yourcompany.com" required autocomplete="url">
+            </div>
+            <div class="field">
+              <label class="t" for="c-email">Email for your result</label>
+              <input id="c-email" name="email" type="email" placeholder="you@yourcompany.com" required autocomplete="email">
+            </div>
+            <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <label class="consent"><input type="checkbox" name="consent" required><span>I agree that my website address and email will be used only to run this check and send me the result.</span></label>
+            <button class="btn btn-dark" type="submit">Check my website for free</button>
+            <p class="msg" role="status" aria-live="polite"></p>
+            <p class="fine">No account. No card. Takes less than a minute.</p>
+          </div>
+        </form>
+        <div class="assure">
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4.5 4.5L19 7"/></svg>Free if no issues</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4.5 4.5L19 7"/></svg>One fixed price</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4.5 4.5L19 7"/></svg>Secure Stripe payment</span>
         </div>
       </div>
-      <div class="glass card-cookie">
-        <p>We use cookies to improve your experience.</p>
-        <div class="actions"><span class="accept">Accept</span><span class="reject">Reject</span></div>
+
+      <div>
+        <div class="report" aria-label="Example of a check result">
+          <div class="rep-top">
+            <svg class="ring" width="76" height="76" viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="32" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="5"/><circle cx="38" cy="38" r="32" fill="none" stroke="#C9A45C" stroke-width="5" stroke-linecap="round" stroke-dasharray="129 201" transform="rotate(-90 38 38)"/><text x="38" y="44" text-anchor="middle" fill="#fff" font-family="Newsreader,serif" font-size="22">64</text></svg>
+            <div><b>Example result</b><small>yourcompany.com · illustration</small></div>
+          </div>
+          <div class="find"><span class="dot" style="background:var(--bad)"></span><div><strong>Analytics loads before consent</strong><p>Tracking scripts fire before the visitor makes a choice.</p></div></div>
+          <div class="find"><span class="dot" style="background:var(--warn)"></span><div><strong>Privacy policy is incomplete</strong><p>Retention periods and processors are not listed.</p></div></div>
+          <div class="find"><span class="dot" style="background:var(--ok)"></span><div><strong>Legal notice present</strong><p>Linked from every page.</p></div></div>
+          <p class="rep-foot">Free: short summary of what is wrong. Full report: every issue and how to fix it.</p>
+        </div>
       </div>
-      <div class="glass card-dash">
-        <div class="dash-top"><span>Privacy Score</span><span class="dash-score">72 / 100</span></div>
-        <div class="dash-bar"><div class="dash-bar-fill"></div></div>
-        <div class="dash-grid"><div>GDPR: Review</div><div>Cookies: OK</div></div>
+    </div>
+  </section>
+
+  <section class="s white" id="process">
+    <div class="wrap">
+      <h2>From URL to answer in four steps</h2>
+      <p class="sub">The check is free. You only pay if you want the complete list of fixes.</p>
+      <div class="steps">
+        <div class="step"><span class="n">1</span><h3>Submit your website</h3><p>Add the address and your email. No signup.</p></div>
+        <div class="step"><span class="n">2</span><h3>We run the check</h3><p>GDPR, cookies, privacy policy and legal pages.</p></div>
+        <div class="step"><span class="n">3</span><h3>You get the result</h3><p>All fine: done, free. Problems: a short description of what is wrong.</p></div>
+        <div class="step"><span class="n">4</span><h3>Fix and re-check</h3><p>Buy the full report for €99 and get one more free check after you improve.</p></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="process" class="section">
-  <div class="wrap">
-    <h2>A simple process. Clear results.</h2>
-    <div style="height:40px;"></div>
-    <div class="steps">
-      <div><span class="num">01</span><h3>Send your website</h3><p>Share your URL — no signup, no obligation.</p></div>
-      <div><span class="num">02</span><h3>Initial review</h3><p>We check for material compliance gaps.</p></div>
-      <div><span class="num">03</span><h3>Get your result</h3><p>Free summary, or a detailed report for €99.</p></div>
-      <div><span class="num">04</span><h3>Fix &amp; review</h3><p>Apply the changes, request a follow-up check.</p></div>
+  <section class="s" id="scope">
+    <div class="wrap">
+      <h2>What we check</h2>
+      <p class="sub">The areas that most often lead to complaints and fines.</p>
+      <div class="scope">
+        <div><h3>Cookie consent</h3><p>Is there a banner, can visitors reject as easily as accept, and do scripts wait for consent?</p></div>
+        <div><h3>Tracking and third parties</h3><p>Analytics, ad pixels, embedded videos, maps and fonts that send visitor data elsewhere.</p></div>
+        <div><h3>Privacy policy</h3><p>Whether the required information is present: purposes, legal bases, recipients, rights, retention.</p></div>
+        <div><h3>Legal pages and forms</h3><p>Legal notice, contact and signup forms, and how they handle personal data.</p></div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="check" class="section" style="background:#fff;">
-  <div class="wrap">
-    <h2>What we check</h2>
-    <p class="lead">Every review covers the areas that create the most legal and reputational exposure.</p>
-    <div class="cards4">
-      <div class="card"><div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E5AA8" stroke-width="2"><path d="M12 2 20 6v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/></svg></div><h3>GDPR &amp; Privacy</h3><p>Privacy policies and lawful data handling.</p></div>
-      <div class="card"><div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E5AA8" stroke-width="2"><rect x="3" y="7" width="18" height="12" rx="2"/><circle cx="8" cy="12" r="1.2" fill="#1E5AA8"/><circle cx="14" cy="15" r="1.2" fill="#1E5AA8"/></svg></div><h3>Cookies &amp; Tracking</h3><p>Consent mechanisms, analytics and tracking scripts.</p></div>
-      <div class="card"><div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E5AA8" stroke-width="2"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h7M9 8h3"/></svg></div><h3>Legal Information</h3><p>Required legal pages and disclosures.</p></div>
-      <div class="card"><div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E5AA8" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h6"/></svg></div><h3>Implementation</h3><p>Forms, embedded services and third-party scripts.</p></div>
+  <section class="s white" id="pricing">
+    <div class="wrap">
+      <h2>Simple pricing</h2>
+      <p class="sub">Free to find out. €99 to fix it properly.</p>
+      <div class="price-grid">
+        <div class="plan">
+          <h3>Free check</h3>
+          <div class="amount">€0</div>
+          <ul>
+            <li>Review of your website</li>
+            <li>If all is OK: you are done, nothing to pay</li>
+            <li>If not: a short description of what is wrong</li>
+          </ul>
+          <a class="btn btn-outline" href="#check" data-home>Start free check</a>
+        </div>
+        <div class="plan main">
+          <h3>Full report</h3>
+          <div class="amount">€99 <small>one-time</small></div>
+          <ul>
+            <li>Every issue found, in plain language</li>
+            <li>What to change, in priority order</li>
+            <li>PDF report sent to your email</li>
+            <li>One additional free check after you improve</li>
+          </ul>
+          <a class="btn btn-gold" href="#checkout" data-checkout>Get the full report</a>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+   <section class="s" id="faq">
+    <div class="wrap faq">
+      <h2>Questions</h2>
+      <div style="height:28px"></div>
+      <details><summary>Is the check really free?</summary><p>Yes. If we find no material problems you pay nothing and owe us nothing.</p></details>
+      <details><summary>What do I get if there are problems?</summary><p>A short description of what is wrong. The €99 report adds every issue, why it matters and how to fix it.</p></details>
+      <details><summary>What is the additional free check?</summary><p>After you buy the report and make your changes, you can ask us to check the website again at no extra cost.</p></details>
+      <details><summary>Do you change my website?</summary><p>No. We review and report. You or your developer make the changes.</p></details>
+      <details><summary>Is this legal advice?</summary><p>No. It is a practical compliance review. For binding legal opinions, consult a lawyer.</p></details>
+      <details><summary>How do I pay?</summary><p>On Stripe’s secure checkout page. We never see your card details.</p></details>
+    </div>
+  </section>
+</main>
 
-<section id="pricing" class="section">
-  <div class="wrap" style="max-width:720px;">
-    <div class="price-card">
-      <div class="grid-lines"></div>
-      <div class="price-inner">
-        <p class="price-label">Detailed Website Compliance Report</p>
-        <p class="price-amount">€99</p>
-        <ul class="price-list">
-          <li>Website review</li><li>GDPR review</li>
-          <li>Cookie review</li><li>Privacy policy review</li>
-          <li>Identified issues</li><li>Priority levels</li>
-          <li>Practical recommendations</li><li>PDF report by email</li>
+<main id="checkout">
+  <div class="wrap">
+    <div style="max-width:980px;margin:0 auto"><a class="back" href="#top" data-home>← Back to the website</a></div>
+    <div class="co-grid">
+      <div>
+        <h2>Get your full report</h2>
+        <p class="sub">Enter your details and continue to secure payment. The report is sent to the email you enter.</p>
+        <form class="form-card" data-form="checkout" novalidate>
+          <div class="form-inner">
+            <div class="field">
+              <label class="t" for="p-email">Email for your report</label>
+              <input id="p-email" name="email" type="email" placeholder="you@yourcompany.com" required autocomplete="email">
+            </div>
+            <div class="field">
+              <label class="t" for="p-url">Website address</label>
+              <input id="p-url" name="website" type="url" inputmode="url" placeholder="https://yourcompany.com" required autocomplete="url">
+            </div>
+            <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <label class="consent"><input type="checkbox" name="consent" required><span>I agree to the <a href="terms.html">Terms</a> and that my details will be used to prepare and send my report.</span></label>
+            <button class="btn btn-gold" type="submit">Continue to payment</button>
+            <p class="msg" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+      <aside class="summary" aria-label="Order summary">
+        <h3 style="font-weight:600;margin-bottom:6px">Order summary</h3>
+        <div class="sum-row"><span>Detailed website compliance report</span><span>€99.00</span></div>
+        <ul>
+          <li>All issues and how to fix them</li>
+          <li>Priority order</li>
+          <li>PDF by email</li>
+          <li>One additional free check after improvement</li>
         </ul>
-        <a href="#" class="btn btn-gold" data-stripe-btn>Get My Report</a>
-        <p class="small-note">Secure Stripe payment · No subscriptions</p>
-      </div>
+        <div class="sum-row total"><span>Total</span><span>€99.00</span></div>
+        <p class="secure"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex:none;margin-top:2px"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>Payment handled securely by Stripe. One-time, no subscription.</p>
+      </aside>
     </div>
   </div>
-</section>
-
-<section id="free-review" class="section" style="background:#fff;">
-  <div class="wrap" style="max-width:720px;">
-    <div class="free-card">
-      <h3 style="font-size:1.5rem; margin-bottom:0;">Free Preliminary Review</h3>
-      <div class="free-grid">
-        <div class="free-box"><p class="label">No issues found</p><p>You pay nothing.</p></div>
-        <div class="free-box"><p class="label">Issues found</p><p>Purchase the detailed report for €99.</p></div>
-      </div>
-
-      <form id="free-review-form" class="form">
-        <div class="field">
-          <label for="fr-url">Website URL</label>
-          <input id="fr-url" name="Website" type="url" placeholder="https://example.com" required>
-        </div>
-        <div class="field">
-          <label for="fr-email">Your email</label>
-          <input id="fr-email" name="Email" type="email" placeholder="you@company.com" required>
-        </div>
-        <label class="consent">
-          <input type="checkbox" name="consent" required>
-          <span>I agree that this information will be used only to carry out and respond to my compliance review request.</span>
-        </label>
-        <button type="submit" class="btn btn-navy" style="width:100%;">Start Free Review</button>
-        <p class="form-msg" id="fr-msg"></p>
-      </form>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <h2>Independent. Practical. Focused.</h2>
-    <div style="height:32px;"></div>
-    <div class="trust4">
-      <div><div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E5AA8" stroke-width="2"><path d="M12 2 20 6v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/></svg></div><p>Independent review</p></div>
-      <div><div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E5AA8" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18 14 14 0 010-18z"/></svg></div><p>European focus</p></div>
-      <div><div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E5AA8" stroke-width="2"><circle cx="12" cy="8" r="3.5"/><path d="M5 21c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></svg></div><p>Human analysis</p></div>
-      <div><div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E5AA8" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div><p>Practical recommendations</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="faq" class="section" style="background:#fff;">
-  <div class="wrap">
-    <h2>Frequently asked questions</h2>
-    <div style="height:24px;"></div>
-    <div class="faq-list">
-      <div class="faq-item"><button class="faq-btn">Is the review really free? <span class="faq-chevron">+</span></button><div class="faq-panel"><p>Yes. The preliminary review costs nothing, and if we find no material issues, that's the end of it.</p></div></div>
-      <div class="faq-item"><button class="faq-btn">What happens if issues are found? <span class="faq-chevron">+</span></button><div class="faq-panel"><p>You can purchase the detailed €99 report, which lists every finding with priority levels and recommendations.</p></div></div>
-      <div class="faq-item"><button class="faq-btn">Do you modify websites? <span class="faq-chevron">+</span></button><div class="faq-panel"><p>No. We review and report; implementing changes is left to you or your developer.</p></div></div>
-      <div class="faq-item"><button class="faq-btn">Can revised pages be reviewed? <span class="faq-chevron">+</span></button><div class="faq-panel"><p>Yes, a follow-up review can confirm that the issues we raised have been resolved.</p></div></div>
-      <div class="faq-item"><button class="faq-btn">Is this legal advice? <span class="faq-chevron">+</span></button><div class="faq-panel"><p>No. Our reports are practical compliance reviews, not a substitute for legal counsel.</p></div></div>
-      <div class="faq-item"><button class="faq-btn">What does €99 include? <span class="faq-chevron">+</span></button><div class="faq-panel"><p>A full written report covering GDPR, cookies, your privacy policy, identified issues and how to fix them.</p></div></div>
-    </div>
-  </div>
-</section>
+</main>
 
 <footer>
-  <div class="wrap footer-inner">
-    <div>
-      <h4>GDPR, Cookies &amp; Co.</h4>
-      <p style="max-width:280px; font-size:0.9rem;">Independent website compliance reviews.</p>
+  <div class="wrap">
+    <div class="foot">
+      <div><b>GDPR, Cookies &amp; Co.</b>Independent website compliance reviews.</div>
+      <nav>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="cookie-policy.html">Cookie Policy</a>
+        <a href="terms.html">Terms</a>
+        <a href="legal-notice.html">Legal Notice</a>
+        <a href="contact.html">Contact</a>
+      </nav>
     </div>
-    <nav class="footer-links">
-      <a href="privacy-policy.html">Privacy Policy</a>
-      <a href="cookie-policy.html">Cookie Policy</a>
-      <a href="terms.html">Terms</a>
-      <a href="legal-notice.html">Legal Notice</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+    <p class="disc">Our reviews are practical compliance checks and do not constitute legal advice.</p>
   </div>
 </footer>
 
-<script src="config.js"></script>
-<script src="forms.js"></script>
 <script>
-  wireMailtoForm('free-review-form', 'Free website review request', '#fr-msg');
+/* ============ SETTINGS: edit these two lines ============ */
+const FORM_ENDPOINT = "https://formboost.app/f/903nc28y";          // your form service URL (Formspree, Getform, Basin...)
+const STRIPE_LINK   = "https://buy.stripe.com/28EaEWeGoaLl78oao4a7C01";     // Stripe Payment Link for the €99 report
+/* ========================================================== */
+
+// Switch between landing page and checkout page
+function route(){
+  const co = location.hash === "#checkout";
+  document.body.classList.toggle("is-checkout", co);
+  if (co) window.scrollTo(0,0);
+}
+window.addEventListener("hashchange", route); route();
+document.querySelectorAll("[data-home]").forEach(a => a.addEventListener("click", () => {
+  if (document.body.classList.contains("is-checkout")) {
+    const id = a.getAttribute("href");
+    document.body.classList.remove("is-checkout");
+    setTimeout(() => { const el = document.querySelector(id); if (el) el.scrollIntoView(); }, 0);
+  }
+}));
+
+function show(form, text, type){
+  const m = form.querySelector(".msg");
+  m.className = "msg " + type; m.textContent = text;
+}
+function valid(form){
+  const url = form.website.value.trim(), email = form.email.value.trim();
+  if (!/^https?:\/\/[^\s.]+\.[^\s]{2,}/i.test(url)) { show(form, "Enter the full website address, starting with https://", "err"); form.website.focus(); return false; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { show(form, "Enter a valid email address.", "err"); form.email.focus(); return false; }
+  if (!form.consent.checked) { show(form, "Please tick the consent box to continue.", "err"); return false; }
+  return true;
+}
+async function send(form, kind){
+  const data = { type: kind, website: form.website.value.trim(), email: form.email.value.trim(), _gotcha: form._gotcha.value, page: location.href };
+  const res = await fetch(FORM_ENDPOINT, { method:"POST", headers:{ "Content-Type":"application/json", "Accept":"application/json" }, body: JSON.stringify(data) });
+  if (!res.ok) throw new Error("form");
+}
+
+document.querySelectorAll("form[data-form]").forEach(form => {
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    if (form._gotcha.value) return;           // bot
+    if (!valid(form)) return;
+    const btn = form.querySelector("button[type=submit]"), label = btn.textContent;
+    btn.disabled = true; btn.textContent = "Please wait…";
+    const kind = form.dataset.form;
+    try {
+      await send(form, kind);
+      if (kind === "check") {
+        show(form, "Thank you. We are checking your website and will email your result.", "ok");
+        form.reset();
+      } else {
+        const url = new URL(STRIPE_LINK);
+        url.searchParams.set("prefilled_email", form.email.value.trim());
+        location.href = url.toString();
+        return;
+      }
+    } catch (err) {
+      if (kind === "checkout" && !/YOUR_/.test(STRIPE_LINK)) { // do not block payment if the form service is down
+        const url = new URL(STRIPE_LINK); url.searchParams.set("prefilled_email", form.email.value.trim()); location.href = url.toString(); return;
+      }
+      show(form, "Something went wrong. Please try again in a moment or write to us via the Contact page.", "err");
+    }
+    btn.disabled = false; btn.textContent = label;
+  });
+});
 </script>
 </body>
 </html>
