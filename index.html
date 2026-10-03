@@ -89,7 +89,7 @@ h2{font-family:'Newsreader',Georgia,serif;font-weight:400;font-size:clamp(2rem,3
 .plan li{padding-left:28px;position:relative;font-size:.97rem}
 .plan li:before{content:"";position:absolute;left:0;top:7px;width:12px;height:6px;border-left:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(-45deg)}
 .plan .btn{width:100%}
-  
+
 .faq{max-width:780px}
 details{border-bottom:1px solid var(--line);padding:22px 0}
 summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
@@ -146,7 +146,7 @@ footer{background:var(--night);color:#8E9BBA;padding:60px 0 40px;font-size:.92re
         <h1>Is your website compliant with European privacy law?</h1>
         <p class="lead">Enter your website and email. We check your GDPR and cookie setup against official requirements and send you the result. If everything is in order, you pay nothing.</p>
 
-        <form class="form-card" id="check" data-form="check" novalidate>
+        <form class="form-card" id="check" data-form="check" action="https://formboost.app/f/903nc28y" method="POST" novalidate>
           <div class="form-inner">
             <div class="field">
               <label class="t" for="c-url">Website address</label>
@@ -240,7 +240,8 @@ footer{background:var(--night);color:#8E9BBA;padding:60px 0 40px;font-size:.92re
       </div>
     </div>
   </section>
-   <section class="s" id="faq">
+
+  <section class="s" id="faq">
     <div class="wrap faq">
       <h2>Questions</h2>
       <div style="height:28px"></div>
@@ -349,7 +350,9 @@ async function send(form, kind){
   fd.append("email", form.email.value.trim());
   fd.append("page", location.href);
   const res = await fetch(FORM_ENDPOINT, { method:"POST", body: fd });
-  if (!res.ok) throw new Error("form " + res.status);}
+  if (!res.ok) throw new Error("form " + res.status);
+}
+
 document.querySelectorAll("form[data-form]").forEach(form => {
   form.addEventListener("submit", async e => {
     e.preventDefault();
