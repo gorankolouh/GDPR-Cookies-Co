@@ -1,22 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://www.gdprcookieandco.world/</loc>
-    <lastmod>2026-10-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.gdprcookieandco.world/privacy-policy.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gdprcookieandco.world/cookie-policy.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gdprcookieandco.world/terms.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gdprcookieandco.world/legal-notice.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gdprcookieandco.world/contact.html</loc>
-  </url>
+  <url><loc>https://www.gdprcookieandco.world/</loc></url>
+  <url><loc>https://www.gdprcookieandco.world/gdpr-website-checker.html</loc></url>
+  <url><loc>https://www.gdprcookieandco.world/cookie-compliance-checker.html</loc></url>
+  <url><loc>https://www.gdprcookieandco.world/gdpr-website-audit.html</loc></url>
+  <url><loc>https://www.gdprcookieandco.world/privacy-policy.html</loc></url>
+  <url><loc>https://www.gdprcookieandco.world/cookie-policy.html</loc></url>
+  <url><loc>https://www.gdprcookieandco.world/terms.html</loc></url>
+  <url><loc>https://www.gdprcookieandco.world/legal-notice.html</loc></url>
+  <url><loc>https://www.gdprcookieandco.world/contact.html</loc></url>
 </urlset>
